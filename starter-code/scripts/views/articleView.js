@@ -18,6 +18,10 @@
   };
 
   // COMMENT: What does this method do?  What is it's execution path?
+  // The populateFilters method extracts the unique author and category
+  // names from all articles and appends them to the DOM in the compiled
+  // Handlebars template made for this purpose.
+
   articleView.populateFilters = function() {
     var options;
     var template = Handlebars.compile($('#option-template').text());
@@ -37,6 +41,9 @@
   };
 
   // COMMENT: What does this method do?  What is it's execution path?
+  // This method displays the correct articles when a user
+  // makes a selection from the authors or category menus. The execution
+  // 
   articleView.handleFilters = function() {
     $('#filters').one('change', 'select', function() {
       var resource = this.id.replace('-filter', '');
@@ -86,6 +93,7 @@
    }; */
 
   // COMMENT: What does this method do?  What is it's execution path?
+  // This method truncates the articles' so only the beginning is displayed.
   articleView.index = function(articles) {
     $('#articles').show().siblings().hide();
 
