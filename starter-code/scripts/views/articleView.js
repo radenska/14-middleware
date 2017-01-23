@@ -20,7 +20,8 @@
   // COMMENT: What does this method do?  What is it's execution path?
   // The populateFilters method extracts the unique author and category
   // names from all articles and appends them to the DOM in the compiled
-  // Handlebars template made for this purpose.
+  // Handlebars template made for this purpose. It is called by articleView.index
+  // which is called in routes.js upon the user going to the index or root ('/')
 
   articleView.populateFilters = function() {
     var options;
@@ -41,9 +42,15 @@
   };
 
   // COMMENT: What does this method do?  What is it's execution path?
-  // This method displays the correct articles when a user
-  // makes a selection from the authors or category menus. The execution
-  // 
+  // This method displays the correct articles (sometimes... at least for
+  // the author filter, it doesn't always seem to work) when a user
+  // makes a selection from the authors or category menus. There is
+  // an event listener, which acts when a user changes/makes a selection
+  // from either the author or category menu. It calls the page() function
+  // to generate a url, which is the category or author name (substituting +
+  // for any spaces). The method is called in articleView.index, which is
+  // called in routes.js.
+  //
   articleView.handleFilters = function() {
     $('#filters').one('change', 'select', function() {
       var resource = this.id.replace('-filter', '');
@@ -93,7 +100,13 @@
    }; */
 
   // COMMENT: What does this method do?  What is it's execution path?
-  // This method truncates the articles' so only the beginning is displayed.
+  // This method is what initializes all the components of displaying the
+  // articles. It is called from routes.js when a user navigates to the index
+  // of the site or '/'. It hides the about section and appends all the
+  // articles, and calls populateFilters and handleFilters. It also
+  // hides most of the article body, though it fails to provide any way of
+  // collapsing the body back if you click "read on."
+
   articleView.index = function(articles) {
     $('#articles').show().siblings().hide();
 
